@@ -48,33 +48,6 @@ contract Handler is Test {
         usersWithCollateral.push(msg.sender);
     }
 
-    // break healthFactor revert (revise redeemCollateral in DSCEngine, or figure out the arithmetic)
-    // function redeemCollateral(uint256 collateralSeed, uint256 amountCollateralToRedeem) public {
-    //     ERC20Mock collateral = _getCollateralFromSeed(collateralSeed);
-    //     uint256 userSingleCollateralBalance = dscEngine.getCollateralBalanceOfUser(msg.sender, address(collateral));
-    //     uint256 userSingleCollateralBalanceInUsd =
-    //         dscEngine.getUsdValue(address(collateral), userSingleCollateralBalance);
-    //     (uint256 totalDscMinted, uint256 totalcollateralValueInUsd) = dscEngine.getAccountInformation(msg.sender);
-    //     uint256 maxCollateralToRedeemInUsd = (totalcollateralValueInUsd - totalDscMinted) / 2;
-    //     uint256 maxSingleCollateralToRedeemInUsd;
-    //     if (userSingleCollateralBalanceInUsd > maxCollateralToRedeemInUsd) {
-    //         maxSingleCollateralToRedeemInUsd = maxCollateralToRedeemInUsd;
-    //     } else {
-    //         maxSingleCollateralToRedeemInUsd = userSingleCollateralBalanceInUsd;
-    //     }
-    //     uint256 maxSingleCollateralToRedeem =
-    //         dscEngine.getTokenAmountFromUsd(address(collateral), maxSingleCollateralToRedeemInUsd);
-    //     //uint256 maxCollateralToRedeem = dscEngine.getCollateralBalanceOfUser(msg.sender, address(collateral));
-    //     amountCollateralToRedeem = bound(amountCollateralToRedeem, 0, maxSingleCollateralToRedeem);
-    //     if (amountCollateralToRedeem == 0) {
-    //         return;
-    //     }
-    //     timesRedeemCollateralIsCalled++;
-    //     // vm.assume(amountCollateralToRedeem != 0); // Failed
-    //     vm.prank(msg.sender);
-    //     dscEngine.redeemCollateral(address(collateral), amountCollateralToRedeem);
-    // }
-
     function redeemCollateral(uint256 collateralSeed, uint256 amountCollateralToRedeem) public {
         ERC20Mock collateral = _getCollateralFromSeed(collateralSeed);
         uint256 maxCollateralToRedeem = dscEngine.getCollateralBalanceOfUser(msg.sender, address(collateral));
