@@ -66,7 +66,8 @@ contract Handler is Test {
             // Check if the selector matches DSCEngine__BreaksHealthFactor
             if (selector == DSCEngine.DSCEngine__BreaksHealthFactor.selector) {
                 // Ignore this specific revert error
-            } else {
+            } 
+            else {
                 // Handle other unexpected reverts
                 revert(string(lowLevelData));
             }
